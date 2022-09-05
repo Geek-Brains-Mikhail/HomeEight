@@ -2,10 +2,12 @@
 // массив размером 2 x 2 x 2
 // 12(0,0,0) 22(0,0,1)
 // 45(1,0,0) 53(1,0,1)
+Console.Clear();
 void FillArray(int[,,] array)
 {
     Random rand = new Random();
     bool isWork = true;
+    int index = 0;
     int[] ArrayTwoDeminsional = new int[8];
     int numberRandom = 0;
     for (int i = 0; i < array.GetLength(0); i++)
@@ -16,18 +18,29 @@ void FillArray(int[,,] array)
             {
                 while (isWork)
                 {
-                    numberRandom = rand.Next(10, 100);
+                    numberRandom = rand.Next(1, 11);
                     for (int l = 0; l < ArrayTwoDeminsional.Length; l++)
                     {
-                        if (numberRandom != ArrayTwoDeminsional[i]) isWork = false;
+                        if (numberRandom == ArrayTwoDeminsional[l])
+                        {
+                            isWork = false;
+                            l = ArrayTwoDeminsional.Length;
+                        }
+
                     }
-                    if (isWork == false)
+                    if (isWork == true)
                     {
-                        ArrayTwoDeminsional[i] = numberRandom;
+                        ArrayTwoDeminsional[index] = numberRandom;
                         array[i, j, o] = numberRandom;
                         Console.WriteLine($"{array[i, j, o]} ({i},{j},{o})");
+                        isWork = false;
+                    }
+                    else
+                    {
+                        isWork = true;
                     }
                 }
+                index++;
                 isWork = true;
             }
         }
